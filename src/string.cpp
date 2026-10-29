@@ -130,22 +130,27 @@ char * String::strdup(const char * src) {
 
 // constructors
 String::String(const char * s) {
-    strncpy(buf, s, MAXLEN - 1);
+    buf = strdup(s);
 }
 
 String::String(const String &s) {
-    strncpy(buf, s.buf, MAXLEN - 1);
+    buf = strdup(s.buf);
+}
+
+// Swap
+void String::swap(String &s) {
+	std::swap(buf, s.buf);
 }
 
 // assignment
-String &String::operator=(const String &s) {
-    strcpy(buf, s.buf);
+String &String::operator=(String s) {
+    swap(s);
     return *this;
 }
 
 // destructor
 String::~String() {
-    //cout << "String " << buf << " is destructing" << endl;
+    delete[] buf;
 }
 
 // size
