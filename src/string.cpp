@@ -137,6 +137,12 @@ String::String(const String &s) {
     buf = strdup(s.buf);
 }
 
+// length constructor
+
+String::String(int length) {
+	buf = new char[lenth+1];
+}
+
 // Swap
 void String::swap(String &s) {
 	std::swap(buf, s.buf);
