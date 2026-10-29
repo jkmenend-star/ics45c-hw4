@@ -258,7 +258,10 @@ String String::reverse() const {
 
 // reading
 void String::read(istream &in) {
-    in >> setw(MAXLEN) >> buf;
+    char temp[1024];
+	in >> setw(1024) >> buf;
+	delete[] buf;
+	buf = strdup(temp);
 }
 
 istream &operator>>(istream &in, String &s) {
