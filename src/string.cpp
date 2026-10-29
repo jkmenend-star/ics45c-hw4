@@ -121,6 +121,13 @@ void String::reverse_cpy(char * dest, const char * src) {
     dest[len] = '\0';
 }
 
+char * String::strdup(const char * src) {
+	int len = strlen(src) + 1;
+	char * heap_str = new char[len];
+	strcpy(heap_str, src);
+	return heap_str;
+}
+
 // constructors
 String::String(const char * s) {
     strncpy(buf, s, MAXLEN - 1);
