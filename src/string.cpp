@@ -183,6 +183,15 @@ char &String::operator[](int index) {
     return buf[index];
 }
 
+const char &String::operator[](int index) const {
+	if (!in_bounds(index)) {
+		cout << "ERROR: Index Out Of Bounds" << endl;
+		return buf[0];
+	}
+	return buf[index];
+}
+
+
 // comparisons
 bool String::operator==(const String &s) const {
     return strcmp(buf, s.buf) == 0;
@@ -226,28 +235,23 @@ int String::indexOf(const String &s) const {
 }
 
 // concatenation
-String &String::operator+=(const String &s) {
-    int mySize = size();
-    int otherSize = s.size();
-    int room = MAXLEN - 1 - mySize;
-    if (otherSize > room) {
-        cout << "error: string capacity exceeded" << endl;
-        strncat(buf, s.buf, room);
-    } else {
-        strncat(buf, s.buf, otherSize);
-    }
+String &String::operator+=(String s) {
+    String result(size() + s.size());
+	strcpy(result.buf, buf);
+	strcat(result.buf, s.buf);
+	swap(result);
     return *this;
 }
 
-String String::operator+(const String &s) const {
-    String result(*this);
-    result += s;
+String String::operator+(String s) const {
+    String result(size() + s.size());
+    strcpy(result.buf, buf);
+	strcat(result.buf, s.buf);
     return result;
-}
 
 // reverse
 String String::reverse() const {
-    String result;
+    String result(size());
     reverse_cpy(result.buf, buf);
     return result;
 }
