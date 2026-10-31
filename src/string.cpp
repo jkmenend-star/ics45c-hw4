@@ -137,6 +137,10 @@ String::String(const String &s) {
     buf = strdup(s.buf);
 }
 
+String::String(String &&s) : buf(nullptr) {
+    swap(s);
+}
+
 // length constructor
 
 String::String(int length) {
@@ -149,7 +153,13 @@ void String::swap(String &s) {
 }
 
 // assignment
-String &String::operator=(String s) {
+String &String::operator=(const String &s) {
+	String temp(s);
+    swap(temp);
+    return *this;
+}
+
+String &String::operator=(String &&s) {
     swap(s);
     return *this;
 }
