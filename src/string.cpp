@@ -245,7 +245,7 @@ int String::indexOf(const String &s) const {
 }
 
 // concatenation
-String &String::operator+=(String s) {
+String &String::operator+=(const String &s) {
     String result(size() + s.size());
 	strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
@@ -253,7 +253,7 @@ String &String::operator+=(String s) {
     return *this;
 }
 
-String String::operator+(String s) const {
+String String::operator+(const String &s) const {
     String result(size() + s.size());
     strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
@@ -279,3 +279,4 @@ istream &operator>>(istream &in, String &s) {
     s.read(in);
     return in;
 }
+
