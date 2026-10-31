@@ -144,7 +144,7 @@ String::String(String &&s) : buf(nullptr) {
 // length constructor
 
 String::String(int length) {
-	buf = new char[lenth+1];
+	buf = new char[length+1];
 }
 
 // Swap
@@ -258,6 +258,7 @@ String String::operator+(String s) const {
     strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
     return result;
+}
 
 // reverse
 String String::reverse() const {
@@ -269,7 +270,7 @@ String String::reverse() const {
 // reading
 void String::read(istream &in) {
     char temp[1024];
-	in >> setw(1024) >> buf;
+	in >> setw(1024) >> temp;
 	delete[] buf;
 	buf = strdup(temp);
 }
