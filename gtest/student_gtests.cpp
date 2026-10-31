@@ -129,3 +129,21 @@ TEST(StringFunction, strstr) {
     EXPECT_EQ(String::strstr(text, "xyz"), nullptr);
     EXPECT_EQ(String::strstr(text, "mississippi river"), nullptr);
 }
+
+TEST(StringFunction, strdup) {
+    char *copy = String::strdup("bruh");
+    EXPECT_STREQ(copy, "bruh");
+    delete[] copy;
+
+    char *empty = String::strdup("");
+    EXPECT_STREQ(empty, "");
+    delete[] empty;
+
+    char *scream = String::strdup("BLUDLAWG");
+    EXPECT_STREQ(scream, "BLUDLAWG");
+    delete[] scream;
+
+    char *one = String::strdup("L");
+    EXPECT_STREQ(one, "L");
+    delete[] one;
+}
